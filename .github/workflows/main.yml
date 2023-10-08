@@ -6,7 +6,7 @@ on:
 
 jobs:
   compile:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.13
@@ -21,3 +21,29 @@ jobs:
 
     - name: Use make
       run: make --version
+
+    - name: Checkout mapbox/protozero
+      uses: actions/checkout@v4
+      with:
+        repository: mapbox/protozero
+
+    - name: Checkout osmcode/libosmium
+      uses: actions/checkout@v4
+      with:
+        repository: osmcode/libosmium
+
+    - name: Checkout osmcode/osmium-tool
+      uses: actions/checkout@v4
+      with:
+        repository: osmcode/osmium-tool
+
+    - name: Make
+      run: |
+        cd osmium-tool
+        mkdir build
+        cd build
+        cmake ..
+        ccmake .
+        make
+        ls src\
+        ls src\Release\
