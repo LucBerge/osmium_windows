@@ -21,6 +21,15 @@ jobs:
         repository: mapbox/protozero
         path: protozero
 
+    - name: List protozero
+      shell: bash
+      run: |
+        ls protozero
+        echo "====="
+        ls protozero/include
+        echo "====="
+        ls protozero/include/protozero
+
     - name: Checkout osmcode/libosmium
       uses: actions/checkout@v4
       with:
