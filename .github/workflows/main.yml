@@ -9,6 +9,11 @@ jobs:
     runs-on: windows-latest
     steps:
 
+    - name: Test
+      shell: bash
+      run: |
+        cmake -G
+
     - name: Checkout microsoft/vcpkg
       uses: actions/checkout@v4
       with:
@@ -50,7 +55,7 @@ jobs:
 
     - name: Make
       working-directory: osmium-tool
-      shell: pwsh
+      shell: bash
       run: |
         mkdir build
         cmake -LA . -DCMAKE_TOOLCHAIN_FILE=..\vcpkg\scripts\buildsystems\vcpkg.cmake -DOsmium_DEBUG=TRUE -DPROTOZERO_INCLUDE_DIR=..\protozero\include -B build
