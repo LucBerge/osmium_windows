@@ -21,19 +21,6 @@ jobs:
         repository: mapbox/protozero
         path: protozero
 
-    - name: List protozero
-      shell: bash
-      run: |
-        pwd
-        echo "====="
-        ls
-        echo "====="
-        ls protozero
-        echo "====="
-        ls protozero/include
-        echo "====="
-        ls protozero/include/protozero
-
     - name: Checkout osmcode/libosmium
       uses: actions/checkout@v4
       with:
@@ -45,6 +32,11 @@ jobs:
       with:
         repository: osmcode/osmium-tool
         path: osmium-tool
+
+    - name: Install CPP
+      uses: rlalik/setup-cpp-compiler@master
+      with:
+        compiler: latest
 
     - name: Install vcpkg
       shell: pwsh
