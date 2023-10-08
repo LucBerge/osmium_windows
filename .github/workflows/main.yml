@@ -8,45 +8,46 @@ jobs:
   compile:
     runs-on: windows-latest
     steps:
-    - name: Setup cmake
-      uses: jwlawson/actions-setup-cmake@v1.13
+
+    - name: Checkout microsoft/vcpkg
+      uses: actions/checkout@v4
       with:
-        cmake-version: '3.16.x'
-
-    - name: Use cmake
-      run: cmake --version
-
-    #- name: Use ccmake
-    #  run: ccmake --version
-
-    - name: Use make
-      run: make --version
+        repository: microsoft/vcpkg
+        path: vcpkg
 
     - name: Checkout mapbox/protozero
       uses: actions/checkout@v4
       with:
         repository: mapbox/protozero
+        path: protozero
 
     - name: Checkout osmcode/libosmium
       uses: actions/checkout@v4
       with:
         repository: osmcode/libosmium
+        path: libosmium
 
     - name: Checkout osmcode/osmium-tool
       uses: actions/checkout@v4
       with:
         repository: osmcode/osmium-tool
+        path: osmium-tool
+
+    - name: Install vcpkg
+      shell: pwsh
+      run: |
+        .\vcpkg\bootstrap-vcpkg.bat
+
+    - name: Install dependencies
+      shell: pwsh
+      run: |
+        .\vcpkg\vcpkg.exe install boost-iterator:x64-windows boost-program-options:x64-windows boost-variant:x64-windows bzip2:x64-windows expat:x64-windows lz4:x64-windows zlib:x64-windows 
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: '3.16.x'
 
     - name: Make
       run: |
-        cd osmium-tool
-        mkdir build
-        cd build
-        cmake ..
         ls
-        ccmake .
-        ls
-        make
-        ls
-        ls src\
-        ls src\Release\
