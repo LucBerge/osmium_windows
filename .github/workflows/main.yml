@@ -33,12 +33,6 @@ jobs:
         repository: osmcode/osmium-tool
         path: osmium-tool
 
-    - name: Install CPP
-      uses: rlalik/setup-cpp-compiler@master
-      with:
-        compiler: latest
-        
-
     - name: Install vcpkg
       shell: pwsh
       run: |
