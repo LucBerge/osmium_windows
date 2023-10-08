@@ -55,8 +55,8 @@ jobs:
         mkdir build
         cmake -LA . -DCMAKE_TOOLCHAIN_FILE=..\vcpkg\scripts\buildsystems\vcpkg.cmake -DOsmium_DEBUG=TRUE -DPROTOZERO_INCLUDE_DIR=..\protozero\include -B build
       env:
-       CC:   gcc-10
-       CXX:  g++-10
+       CC:   gcc
+       CXX:  g++
 
     - name: Build
       shell: bash
