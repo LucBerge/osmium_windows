@@ -24,6 +24,8 @@ jobs:
     - name: List protozero
       shell: bash
       run: |
+        pwd
+        echo "====="
         ls protozero
         echo "====="
         ls protozero/include
@@ -64,10 +66,11 @@ jobs:
         mkdir build
 
     - name: Make
+      working-directory: build
       shell: pwsh
       run: |
         cmake -LA . -DCMAKE_TOOLCHAIN_FILE=..\vcpkg\scripts\buildsystems\vcpkg.cmake -DOsmium_DEBUG=TRUE -DPROTOZERO_INCLUDE_DIR=..\protozero\include -B build
-
+      
     - name: Build
       shell: bash
       run: |
