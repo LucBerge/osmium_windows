@@ -16,8 +16,8 @@ jobs:
     - name: Use cmake
       run: cmake --version
 
-    - name: Use ccmake
-      run: ccmake --version
+    #- name: Use ccmake
+    #  run: ccmake --version
 
     - name: Use make
       run: make --version
@@ -43,7 +43,10 @@ jobs:
         mkdir build
         cd build
         cmake ..
+        ls
         ccmake .
+        ls
         make
+        ls
         ls src\
         ls src\Release\
