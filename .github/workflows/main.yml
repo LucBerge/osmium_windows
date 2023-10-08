@@ -48,12 +48,16 @@ jobs:
       with:
         cmake-version: '3.16.x'
 
-    - name: Make
+    - name: Create build dir
       shell: bash
       run: |
         cd osmium-tool
         mkdir build
-        cmake -LA . -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DOsmium_DEBUG=TRUE -DPROTOZERO_INCLUDE_DIR=../protozero/include -B build
+
+    - name: Make
+      shell: pwsh
+      run: |
+        cmake -LA . -DCMAKE_TOOLCHAIN_FILE=..\vcpkg\scripts\buildsystems\vcpkg.cmake -DOsmium_DEBUG=TRUE -DPROTOZERO_INCLUDE_DIR=..\protozero\include -B build
 
     - name: Build
       shell: bash
